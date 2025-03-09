@@ -1,4 +1,4 @@
-trait Car: 
+trait Car {
     val brand: String
     val model: String
     val year: Int
@@ -9,3 +9,8 @@ trait Car:
     val tax: Int
     val mpg: Double
     val engineSize: Double
+
+    override def toString: String = {
+        s"Brand: ${brand}, Model: ${model}"
+    }
+}
