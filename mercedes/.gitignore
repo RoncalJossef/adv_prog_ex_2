@@ -7,6 +7,7 @@ hs_err_pid*
 # Ignore target and build output
 /target/
 /project/target/
+/project
 
 # Ignore metals & BSP (for Scala development in VS Code, IntelliJ)
 /.metals/
