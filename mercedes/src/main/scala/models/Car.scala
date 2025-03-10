@@ -1,3 +1,4 @@
+//jpc: why an abstract class? better to use a trait
 abstract class Car (
     brand: String,
     model: String,
@@ -6,9 +7,9 @@ abstract class Car (
     mileage: Int,
     fuelType: FuelType,
     mpg: Double,
-    engineSize: Double) {
+    engineSize: Double) :
 
-    override def toString: String = {
+    override def toString: String = 
         s"Brand: ${brand}, Model: ${model}, Year: ${year}, Transmission: ${transmission.toString}"
-    }
-}
+    
+
