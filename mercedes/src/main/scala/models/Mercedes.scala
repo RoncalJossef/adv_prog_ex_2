@@ -4,14 +4,15 @@ import scala.util.{Try, Success, Failure}
 case class Mercedes(
     model: String,
     year: Int,
-    price: Double,
-    transmition: Transmission,
+    price: Int,
+    transmission: Transmission,
     mileage: Int,
     fuelType: FuelType,
     tax: Int,
     mpg: Double,
-    engineSize: Double) extends Car {
-    val brand: String = "Mercedes"
+    engineSize: Double) 
+    extends Car("Mercedes", model, year, transmission, mileage, fuelType, mpg, engineSize)
+    with Pricing with Taxable {
 }
 
 object Mercedes {
@@ -25,7 +26,7 @@ object Mercedes {
                         Mercedes(
                         columns(0), //model
                         columns(1).toInt, // year
-                        columns(2).toDouble,  // price
+                        columns(2).toInt,  // price
                         Transmission.safeValueOf(columns(3)), 
                         columns(4).toInt, // mileage
                         FuelType.safeValueOf(columns(5)), 

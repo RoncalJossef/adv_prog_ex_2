@@ -1,5 +1,5 @@
 object Main extends App {
-  val filename = "/data/04-MercedessCars.csv"
+  val filename = "/data/04-MercedesCars.csv"
   val result = Mercedes.createFromCSV(filename)
   result match {
     case Right(mercedesCars) => {
