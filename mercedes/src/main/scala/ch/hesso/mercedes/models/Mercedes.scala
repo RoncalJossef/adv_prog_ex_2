@@ -23,11 +23,12 @@ case class Mercedes(
 
 
 object Mercedes :
-  // jpc: somehow interesting use of Either
   def createFromCSV(filename: String): Either[String, List[Mercedes]] = 
-    val file = getClass.getResource(filename)
-    val returnValue = Try(Source.fromURL(file)) match 
-      case Success(source) => 
+    val file = Option(getClass.getResource(filename))
+
+    file match
+      case Some(file) =>
+        val source = Source.fromURL(file)
         val lines = source.getLines().drop(1)
         val mercedesList = lines.map { line =>
           val columns = line.split(",")
@@ -43,9 +44,4 @@ object Mercedes :
             columns(8).toDouble) // engineSize
         }.toList
         Right(mercedesList)
-      case Failure(ex) => 
-        //jpc: is it ok to just let the Failure pass? or whatis the interest of changing it for a Left-Either?
-        Left(s"Error inside Mercedes Factory: ${ex.getMessage} ")
-              
-    returnValue
-    
+      case None => Left("File not found.")    
