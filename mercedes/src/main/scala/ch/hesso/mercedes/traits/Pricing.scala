@@ -1,3 +1,5 @@
+package ch.hesso.mercedes.traits
+
 trait Pricing :
     val price: Option[Int]
 

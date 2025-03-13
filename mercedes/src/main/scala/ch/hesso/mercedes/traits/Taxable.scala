@@ -1,3 +1,5 @@
+package ch.hesso.mercedes.traits
+
 trait Taxable :
     val tax: Option[Int]
 

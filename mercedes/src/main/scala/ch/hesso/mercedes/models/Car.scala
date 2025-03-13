@@ -1,3 +1,7 @@
+package ch.hesso.mercedes.models
+
+import ch.hesso.mercedes.enums.{Transmission, FuelType}
+
 //jpc: why an abstract class? better to use a trait
 abstract class Car (
     brand: String,

@@ -1,5 +1,9 @@
+package ch.hesso.mercedes.models
+
 import scala.io.Source
 import scala.util.{Try, Success, Failure}
+import ch.hesso.mercedes.enums.{Transmission, FuelType}
+import ch.hesso.mercedes.traits.{Pricing, Taxable}
 
 case class Mercedes(
     model: String,

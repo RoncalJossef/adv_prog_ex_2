@@ -1,3 +1,5 @@
+package ch.hesso.mercedes.enums
+
 enum Transmission:
     case Automatic, SemiAuto, Manual, Other
 

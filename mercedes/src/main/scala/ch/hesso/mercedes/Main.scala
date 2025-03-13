@@ -1,3 +1,7 @@
+package ch.hesso.mercedes
+
+import ch.hesso.mercedes.models.Mercedes
+import ch.hesso.mercedes.enums.{Transmission, FuelType}
 
 def processResult(result: Either[String, List[Mercedes]]): Unit =
   result match
