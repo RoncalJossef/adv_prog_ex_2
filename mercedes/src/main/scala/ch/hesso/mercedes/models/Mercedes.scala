@@ -3,7 +3,7 @@ package ch.hesso.mercedes.models
 import scala.io.Source
 import scala.util.{Try, Success, Failure}
 import ch.hesso.mercedes.enums.{Transmission, FuelType}
-import ch.hesso.mercedes.traits.{Pricing, Taxable}
+import ch.hesso.mercedes.traits.{Car, Pricing, Taxable}
 
 case class Mercedes(
     model: String,
@@ -15,8 +15,8 @@ case class Mercedes(
     tax: Option[Int],
     mpg: Double,
     engineSize: Double)
-    extends Car("Mercedes", model, year, transmission, mileage, fuelType, mpg, engineSize)
-    with Pricing with Taxable :
+    extends Car with Pricing with Taxable :
+    val brand = "Mercedes"
 
     override def toString: String =
         s"${super[Car].toString}, ${super[Pricing].toString}, ${super[Taxable].toString}"

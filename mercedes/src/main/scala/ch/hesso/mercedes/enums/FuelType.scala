@@ -3,7 +3,6 @@ package ch.hesso.mercedes.enums
 enum FuelType:
     case Petrol, Hybrid, Diesel, Other
 
-//jpc: we can do without those curly braces
 object FuelType :
   def safeValueOf(str: String): FuelType = 
     str match 
