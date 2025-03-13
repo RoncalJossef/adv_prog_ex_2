@@ -1,7 +1,7 @@
 package ch.hesso.mercedes
 
-import ch.hesso.mercedes.models.Mercedes
-import ch.hesso.mercedes.enums.{Transmission, FuelType}
+import ch.hesso.mercedes.models.{Mercedes, PetrolEngine, DieselEngine}
+import ch.hesso.mercedes.enums.Transmission
 
 def processResult(result: Either[String, List[Mercedes]]): Unit =
   result match
@@ -25,7 +25,7 @@ def Main =
   processResult(result)
 
   val testOptionMercedes = List(
-    Mercedes("S Class", 2025, None, Transmission.Automatic, 100, FuelType.Diesel, Some(100), 130.0, 200.0),
-    Mercedes("GLS", 2018, Some(50022), Transmission.Automatic, 150, FuelType.Petrol, None, 130.0, 200.0),
-    Mercedes("SLS AMG", 2016, None, Transmission.Automatic, 150, FuelType.Petrol, None, 150.0, 250.0)
+    Mercedes("S Class", DieselEngine(200.0), 2025, None, Transmission.Automatic, 100, Some(100), 130.0),
+    Mercedes("GLS", PetrolEngine(200.0), 2018, Some(50022), Transmission.Automatic, 150, None, 130.0),
+    Mercedes("SLS AMG", PetrolEngine(250.0), 2016, None, Transmission.Automatic, 150, None, 150.0)
   ).foreach(println)
