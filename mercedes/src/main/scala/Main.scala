@@ -1,20 +1,24 @@
-//jpc: that main App I think is a bit old
+
+def processResult(result: Either[String, List[Mercedes]]): Unit =
+  result match
+    case Right(mercedesCars) if mercedesCars.nonEmpty =>
+      println(s"There are ${mercedesCars.length} Mercedes cars imported.")
+      mercedesCars.take(3).zipWithIndex.foreach { case (car, index) =>
+        println(car)
+      }
+      println(s"Last car: ${mercedesCars.last}")
+
+    case Right(_) => 
+      println("No Mercedes cars were imported.")
+
+    case Left(errorMessage) => 
+      Console.err.println(s"Failed to read the file: $errorMessage")
+
 @main
 def Main =
   val filename = "/data/04-MercedesCars.csv"
   val result = Mercedes.createFromCSV(filename)
-  result match 
-    case Right(mercedesCars) => 
-      println("There are " + mercedesCars.length + " mercedes cars imported.")
-      println(mercedesCars(0))
-      println(mercedesCars(1))
-      println(mercedesCars(2))
-      println(mercedesCars(mercedesCars.length - 1))
-    
-    case Left(errorMessage) => 
-      println(s"Failed to read the file: $errorMessage")
-    // jpc: not sure what is the interest of the Left here 
-  
+  processResult(result)
 
   val testOptionMercedes = List(
     Mercedes("S Class", 2025, None, Transmission.Automatic, 100, FuelType.Diesel, Some(100), 130.0, 200.0),
