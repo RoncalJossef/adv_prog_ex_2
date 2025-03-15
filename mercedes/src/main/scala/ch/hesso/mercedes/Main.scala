@@ -2,6 +2,7 @@ package ch.hesso.mercedes
 
 import ch.hesso.mercedes.models.{Mercedes, GenericMercedes, PetrolEngine, DieselEngine}
 import ch.hesso.mercedes.enums.Transmission
+import ch.hesso.mercedes.services.TechnicalService
 
 def processResult(result: Either[String, List[GenericMercedes]]): Unit =
   result match
@@ -28,4 +29,8 @@ def Main =
     Mercedes("S Class", DieselEngine(200.0), 2025, None, Transmission.Automatic, 100, Some(100), 130.0),
     Mercedes("GLS", PetrolEngine(200.0), 2018, Some(50022), Transmission.Automatic, 150, None, 130.0),
     Mercedes("SLS AMG", PetrolEngine(250.0), 2016, None, Transmission.Automatic, 150, None, 150.0)
-  ).foreach(println)
+  )
+
+  testOptionMercedes.foreach(println)
+  val technicalService = TechnicalService()
+  testOptionMercedes.foreach(technicalService.process)
