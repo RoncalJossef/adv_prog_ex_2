@@ -20,9 +20,11 @@ case class Mercedes[+T <: Engine](
     override def toString: String =
         s"${super[Car].toString}, ${super[Pricing].toString}, ${super[Taxable].toString}"
 
+// alias allows us to simplify the syntax
+type GenericMercedes = Mercedes[_]
 
 object Mercedes :
-  def createFromCSV(filename: String): Either[String, List[Mercedes[_]]] = 
+  def createFromCSV(filename: String): Either[String, List[GenericMercedes]] = 
     val file = Option(getClass.getResource(filename))
 
     file match
