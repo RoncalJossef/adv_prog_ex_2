@@ -2,19 +2,19 @@ package ch.hesso.mercedes.models
 
 import scala.io.Source
 import scala.util.{Try, Success, Failure}
-import ch.hesso.mercedes.enums.{Transmission, FuelType}
+import ch.hesso.mercedes.enums.Transmission
 import ch.hesso.mercedes.traits.{Car, Engine, Pricing, Taxable}
 
-case class Mercedes(
+case class Mercedes[+T <: Engine](
   model: String,
-  engine: Engine,
+  engine: T,
   year: Int,
   price: Option[Int],
   transmission: Transmission,
   mileage: Int,
   tax: Option[Int],
   mpg: Double)
-  extends Car with Pricing with Taxable :
+  extends Car[T] with Pricing with Taxable :
     val brand = "Mercedes"
 
     override def toString: String =
@@ -22,7 +22,7 @@ case class Mercedes(
 
 
 object Mercedes :
-  def createFromCSV(filename: String): Either[String, List[Mercedes]] = 
+  def createFromCSV(filename: String): Either[String, List[Mercedes[_]]] = 
     val file = Option(getClass.getResource(filename))
 
     file match

@@ -3,10 +3,11 @@ package ch.hesso.mercedes.traits
 import ch.hesso.mercedes.enums.{Transmission}
 import ch.hesso.mercedes.traits.Engine
 
-trait Car[T <: Engine]:
+// Using covariance will allow us to treat Mercedes[PetrolEngine] as a subtype of Car[PetrolEngine]
+trait Car[+T <: Engine]:
     def brand: String
-    def engine: T
-    // Here, parameterized type seems pertinnent to allow us to create functions that could be override for each fuel type
+    val engine: T
+    // Here, parameterized type seems pertinent to allow us to create functions that could be override for each fuel type with type safety
     // We expect that each kind of Engine will have a different behaviour
     // def startEngine(): Unit
     // def accelerate(speed: Int): Unit

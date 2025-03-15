@@ -3,7 +3,7 @@ package ch.hesso.mercedes
 import ch.hesso.mercedes.models.{Mercedes, PetrolEngine, DieselEngine}
 import ch.hesso.mercedes.enums.Transmission
 
-def processResult(result: Either[String, List[Mercedes]]): Unit =
+def processResult(result: Either[String, List[Mercedes[_]]]): Unit =
   result match
     case Right(mercedesCars) if mercedesCars.nonEmpty =>
       println(s"There are ${mercedesCars.length} Mercedes cars imported.")
