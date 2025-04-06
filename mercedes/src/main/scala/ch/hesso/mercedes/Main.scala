@@ -5,6 +5,7 @@ import ch.hesso.mercedes.enums.Transmission
 import ch.hesso.mercedes.services.TechnicalService
 import ch.hesso.mercedes.traits.{Car, CarWithWarranty, Warranty, Pricing}
 import ch.hesso.mercedes.enums.FuelType
+import ch.hesso.mercedes.services.Helper
 
 def processResult(result: Either[String, List[GenericMercedes]]): Unit =
   result match
@@ -15,13 +16,13 @@ def processResult(result: Either[String, List[GenericMercedes]]): Unit =
       }
       println(s"Last car: ${mercedesCars.last}")
 
-      val carsPerYear = Car.carsPerYear(mercedesCars)
+      val carsPerYear = Helper.withLog("Calculating Cars Per Year")(Car.carsPerYear(mercedesCars))
       println(s"We have ${carsPerYear(2010)} from 2010 and ${carsPerYear(2011)} from 2011.")
 
-      val globalPrice = Pricing.getTotalValue(mercedesCars)
+      val globalPrice = Helper.withLog("Calculating Total Value of Cars")(Pricing.getTotalValue(mercedesCars))
       println(s"The total value of all available cars is $globalPrice.")
 
-      val carsByEngine = Car.carsByEngineType(mercedesCars)
+      val carsByEngine = Helper.withLog("Calculating Cars per Type of Engine")(Car.carsByEngineType(mercedesCars))
       println(s"We have ${carsByEngine(FuelType.Diesel)} diesel cars, that we have to sell before severe legislation.")      
       
       val technicalService = TechnicalService()
