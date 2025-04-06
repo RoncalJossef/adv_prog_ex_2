@@ -2,6 +2,7 @@ package ch.hesso.mercedes.traits
 
 import ch.hesso.mercedes.enums.{Transmission}
 import ch.hesso.mercedes.traits.Engine
+import ch.hesso.mercedes.enums.FuelType
 
 // Using covariance will allow us to treat Mercedes[PetrolEngine] as a subtype of Car[PetrolEngine]
 trait Car[+T <: Engine]:
@@ -19,6 +20,27 @@ trait Car[+T <: Engine]:
     val mpg: Double
 
     override def toString: String = 
-        s"Brand: ${brand}, Model: ${model}, Engine: ${engine}, Transmission: ${transmission.toString}"
+        s"Brand: ${brand}, Model: ${model}, Engine: ${engine}, Transmission: ${transmission.toString}, Year: ${year}"
+
+
+object Car:
+
+    def carsPerYear(cars: List[Car[_]]): Map[Int, Int] =
+        // Using group by and maps allows us to get all the cars by year in order to do report about it.
+        cars
+        .groupBy(_.year)
+        .mapValues(_.length)
+        .toSeq
+        .sortBy(_._1)
+        .toMap
+
+    def carsByEngineType(cars: List[Car[_]]): Map[FuelType, Int] =
+        // Using group by and maps allows us to get all the cars by fueltype.
+        cars
+        .groupBy(_.engine.fuelType)
+        .mapValues(_.length)
+        .toMap
+
+
     
 
