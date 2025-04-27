@@ -4,6 +4,9 @@ import scala.io.Source
 import scala.util.{Try, Success, Failure}
 import ch.hesso.mercedes.enums.Transmission
 import ch.hesso.mercedes.traits.{Car, Engine, Pricing, Taxable}
+import cats._
+import cats.implicits._
+import ch.hesso.mercedes.traits.Displayable
 
 case class Mercedes[+T <: Engine](
   model: String,
@@ -47,3 +50,8 @@ object Mercedes :
         }.toList
         Right(mercedesList)
       case None => Left("File not found.")    
+
+given Displayable[Mercedes[?]] with
+  def display(car: Mercedes[?]): String =
+    s"Mercedes { Model: ${car.model}, Engine: ${car.engine}, Transmission: ${car.transmission.toString}, Year: ${car.year}"
+    
